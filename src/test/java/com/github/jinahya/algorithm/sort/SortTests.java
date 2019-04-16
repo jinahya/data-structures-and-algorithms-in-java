@@ -1,4 +1,4 @@
-package com.github.jinahya.algorithms.sort;
+package com.github.jinahya.algorithm.sort;
 
 import org.junit.jupiter.params.provider.Arguments;
 

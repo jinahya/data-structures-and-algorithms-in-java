@@ -15,19 +15,14 @@
  */
 
 
-package com.github.jinahya.algorithms.sort;
-
+package com.github.jinahya.algorithm.sort;
 
 /**
- *
- * @author Jin Kwon
  * @param <T>
+ * @author Jin Kwon
  */
 public interface Sorter<T extends Comparable<T>> {
 
-
     void sort(Sortee<T> sortee);
-
-
 }
 
