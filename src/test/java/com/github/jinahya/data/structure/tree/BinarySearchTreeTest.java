@@ -1,6 +1,7 @@
 package com.github.jinahya.data.structure.tree;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BinarySearchTreeTest {
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Disabled
     @Test
     public void testSearch() {
         final BinarySearchTree<Integer> binarySearchTree = BinarySearchTree.newInstance();
@@ -28,6 +30,7 @@ public class BinarySearchTreeTest {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Disabled
     @Test
     public void testInsert() {
         final BinarySearchTree<Integer> binarySearchTree = BinarySearchTree.newInstance();

@@ -1,14 +1,10 @@
 package com.github.jinahya.data.structure.tree;
 
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Comparator;
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
-@Slf4j
 public class BinarySearchTree<E> implements RootedTree<E, BinarySearchTreeNode<E>> {
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -29,19 +25,19 @@ public class BinarySearchTree<E> implements RootedTree<E, BinarySearchTreeNode<E
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    public Optional<BinarySearchTreeNode<E>> search(@NonNull final E element) {
+    public Optional<BinarySearchTreeNode<E>> search(final E element) {
         return Optional.ofNullable(root).flatMap(r -> r.search(comparator, element));
     }
 
-    public BinarySearchTreeNode<E> insert(@NonNull final E element) {
+    public BinarySearchTreeNode<E> insert(final E element) {
         if (root == null) {
-            root = new BinarySearchTreeNode<>(null, element);
+            root = new BinarySearchTreeNode<>(element, null);
             return root;
         }
         return root.insert(comparator, element);
     }
 
-//    private BinarySearchTreeNode<E> delete(@NonNull final BinarySearchTreeNode<E> node) {
+//    private BinarySearchTreeNode<E> deleteAt(@NonNull final BinarySearchTreeNode<E> node) {
 //        final BinarySearchTreeNode<E> parent = node.getParent();
 //        if (node.isLeaf()) { // left == null && right == null
 //            if (parent != null) {
@@ -77,34 +73,59 @@ public class BinarySearchTree<E> implements RootedTree<E, BinarySearchTreeNode<E
 //        return;
 //    }
 
-    public Optional<BinarySearchTreeNode<E>> leftMost(final BinarySearchTreeNode<E> node) {
-        BinarySearchTreeNode<E> cursor = node.getLeft();
-        return null;
-    }
-
-    public boolean delete(@NonNull final E element) {
+    public Optional<BinarySearchTreeNode<E>> delete(final E element) {
         final Optional<BinarySearchTreeNode<E>> optional = search(element);
         if (!optional.isPresent()) {
-            return false;
+            return optional;
         }
         final BinarySearchTreeNode<E> node = optional.get();
-        if (node == root) {
-        }
         final BinarySearchTreeNode<E> parent = node.getParent();
-        if (node.isLeaf()) { // left == null && right == null;
-            if (node.isValueLessThan(comparator, parent.getValue())) {
-                parent.setLeft(null);
-            } else {
-                parent.setRight((null));
+        if (node == root) {
+            assert parent == null;
+        } else {
+            assert parent != null;
+            if (node.isLeaf()) { // left == null && right == null;
+                if (parent != null) {
+                    if (node.isValueLessThan(comparator, parent.getValue())) { // left node
+                        parent.setLeft(null);
+                    } else {
+                        parent.setRight((null));
+                    }
+                    node.setParent(null);
+                }
+            } else if (node.getLeft() == null) { // node.right != null
+                final BinarySearchTreeNode<E> right = node.getRight();
+                assert right != null;
+                if (parent != null) {
+                    if (node.isValueLessThan(comparator, parent.getValue())) {
+                        parent.setLeft(right);
+                    } else {
+                        parent.setRight(right);
+                    }
+                    node.setParent(null);
+                }
+            } else if (node.getRight() == null) { // node.left != null
+                final BinarySearchTreeNode<E> left = node.getLeft();
+                assert left != null;
+                if (parent != null) {
+                    if (node.isValueLessThan(comparator, parent.getValue())) {
+                        parent.setLeft(left);
+                    } else {
+                        parent.setRight(left);
+                    }
+                    node.setParent(null);
+                }
+            } else { // left != null && right != null
+                final BinarySearchTreeNode<E> leftMost = node.getRight().getLeftMost();
+                assert leftMost != null;
+//                if (leftMostOptional.isPresent()) {
+//                } else {
+//                    final BinarySearchTreeNode<E> left = node.getLeft();
+//                }
             }
+            node.setParent(null);
         }
-        if (node.getLeft() == null) {
-            parent.setRight(node.getRight());
-        }
-        if (node.getRight() == null) {
-            parent.setLeft(node.getLeft());
-        }
-        return true;
+        return Optional.of(node);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -33,8 +33,8 @@ public final class InsertionSort {
                 if (comparator.compare(previous, next) > 0) {
                     i.remove();
                     j.add(next);
-//                    j.set(next);
-//                    i.set(previous);
+//                    j.setAt(next);
+//                    i.setAt(previous);
                 }
             }
         }

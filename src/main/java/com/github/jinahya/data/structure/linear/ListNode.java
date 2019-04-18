@@ -1,8 +1,8 @@
-package com.github.jinahya.data.structure;
+package com.github.jinahya.data.structure.linear;
 
 import java.io.Serializable;
 
-public interface Node<E> extends Serializable {
+interface ListNode<E> extends Serializable {
 
     // -----------------------------------------------------------------------------------------------------------------
     E getValue();
