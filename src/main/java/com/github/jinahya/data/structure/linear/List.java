@@ -13,10 +13,17 @@ public interface List<E> {
      */
     E getAt(int index);
 
-    E setAt(int index, E value);
+    /**
+     * Replaces the element at the specified position in this list with the specified element.
+     *
+     * @param index index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return the element previously at the specified position
+     */
+    E setAt(int index, E element);
 
     // -----------------------------------------------------------------------------------------------------------------
-    void insertAt(int index, E value);
+    void insertAt(int index, E element);
 
     E deleteAt(int index);
 

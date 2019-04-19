@@ -31,47 +31,47 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
     }
 
     @Override
-    public E setAt(final int index, final E value) {
+    public E setAt(final int index, final E element) {
         if (index < 0) {
             throw new IndexOutOfBoundsException("index(" + index + ") < 0");
         }
         if (index == 0) {
             if (head == null) {
                 final SinglyLinkedListNode<E> node = new SinglyLinkedListNode<>();
-                node.setValue(value);
+                node.setValue(element);
                 head = node;
                 return null;
             } else {
                 final E previous = head.getValue();
-                head.setValue(value);
+                head.setValue(element);
                 return previous;
             }
         }
         final SinglyLinkedListNode<E> node = nodeAt(index);
         final E previous = node.getValue();
-        node.setValue(value);
+        node.setValue(element);
         return previous;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @Override
-    public void insertAt(final int index, final E value) {
+    public void insertAt(final int index, final E element) {
         if (index < 0) {
             throw new IndexOutOfBoundsException("index(" + index + ") < 0");
         }
         if (index == 0) {
             if (head == null) {
                 head = new SinglyLinkedListNode<>();
-                head.setValue(value);
+                head.setValue(element);
             } else {
                 final SinglyLinkedListNode<E> node = new SinglyLinkedListNode<>();
-                node.setValue(value);
+                node.setValue(element);
                 node.setNext(head);
                 head = node;
             }
             return;
         }
-        final SinglyLinkedListNode<E> node = nodeAt(index).insertNext(value);
+        final SinglyLinkedListNode<E> node = nodeAt(index).insertNext(element);
     }
 
     @Override
