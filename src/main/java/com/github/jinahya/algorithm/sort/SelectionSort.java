@@ -2,45 +2,197 @@ package com.github.jinahya.algorithm.sort;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.ListIterator;
 
-public final class SelectionSort {
+import static java.util.Collections.swap;
+
+public class SelectionSort {
 
     // -----------------------------------------------------------------------------------------------------------------
-    public static <E> List<E> sort1(final List<E> list, final Comparator<? super E> comparator) {
+
+    /**
+     * Sorts elements in specified list using specified comparator.
+     *
+     * @param list       the list whose elements are sorted.
+     * @param comparator the comparator for comparing elements in the {@code list}.
+     * @param <E>        element type parameter
+     * @see List#subList(int, int)
+     */
+    public static <E> void sort(final List<E> list, final Comparator<? super E> comparator) {
+        if (list == null) {
+            throw new NullPointerException("list is null");
+        }
+        if (comparator == null) {
+            throw new NullPointerException("comparator is null");
+        }
         for (int i = 0; i < list.size() - 1; i++) {
-            int j = i;
-            for (int k = i + 1; k < list.size(); k++) {
-                if (comparator.compare(list.get(k), list.get(j)) < 0) {
-                    j = k;
+            int m = i;
+            for (int j = i + 1; j < list.size(); j++) {
+                if (comparator.compare(list.get(j), list.get(m)) < 0) {
+                    m = j;
                 }
             }
-            if (j != i) {
-                final E t = list.get(i);
-                list.set(i, list.get(j));
-                list.set(j, t);
+            if (m > i) {
+                swap(list, i, m);
             }
         }
-        return list;
     }
 
-    public static <E> List<E> sort2(final List<E> list, final Comparator<? super E> comparator) {
-        for (final ListIterator<E> outer = list.listIterator(0); outer.hasNext(); ) {
-            final int i = outer.nextIndex();
-            final E n = outer.next();
-            int j = i;
-            for (final ListIterator<E> inner = list.listIterator(j + 1); inner.hasNext(); ) {
-                final int k = inner.nextIndex();
-                if (comparator.compare(inner.next(), list.get(j)) < 0) {
-                    j = k;
+    // -----------------------------------------------------------------------------------------------------------------
+    public static <T> void sort(final T[] array, final int fromIndex, final int toIndex,
+                                final Comparator<? super T> comparator) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        if (comparator == null) {
+            throw new NullPointerException("comparator is null");
+        }
+        for (int i = fromIndex; i < toIndex - 1; i++) {
+            int m = i;
+            for (int j = i + 1; j < toIndex; j++) {
+                if (comparator.compare(array[j], array[m]) < 0) {
+                    m = j;
                 }
             }
-            if (j != i) {
-                outer.set(list.get(j));
-                list.set(j, n);
+            if (m > i) {
+                final T t = array[i];
+                array[i] = array[m];
+                array[m] = t;
             }
         }
-        return list;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public static void sort(final byte[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        for (int i = fromIndex; i < toIndex - 1; i++) {
+            int m = i;
+            for (int j = i + 1; j < toIndex; j++) {
+                if (array[j] < array[m]) {
+                    m = j;
+                }
+            }
+            if (m > i) {
+                final byte t = array[i];
+                array[i] = array[m];
+                array[m] = t;
+            }
+        }
+    }
+
+    public static void sort(final short[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
+    public static void sort(final int[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
+    public static void sort(final long[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
+    public static void sort(final float[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
+    public static void sort(final double[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
+    public static void sort(final char[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
     }
 
     // -----------------------------------------------------------------------------------------------------------------
