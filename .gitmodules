@@ -1,10 +1,6 @@
 [submodule ".idea/codeStyles"]
 	path = .idea/codeStyles
-<<<<<<< HEAD
 	url = https://github.com/onacit/dot-idea-codestyles.git
-=======
-	url = https://github.com/jinahya/dot-idea-codestyles.git
 	update = merge
 	branch = master
 	dirty = ignore
->>>>>>> 06cebfbe782a121825814f348be63abec0234c8d
