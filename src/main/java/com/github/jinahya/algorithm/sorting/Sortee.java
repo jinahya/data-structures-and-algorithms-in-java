@@ -15,14 +15,32 @@
  */
 
 
-package com.github.jinahya.algorithm.sort;
+package com.github.jinahya.algorithm.sorting;
 
-/**
- * @param <T>
- * @author Jin Kwon
- */
-public interface Sorter<T extends Comparable<T>> {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    void sort(Sortee<T> sortee);
+public interface Sortee<T extends Comparable<T>> {
+
+    static <T extends Comparable<T>> Sortee<T> newInstance(T[] array) {
+
+        array = Arrays.copyOfRange(array, 0, array.length);
+
+        return null;
+    }
+
+    static <T extends Comparable<T>> Sortee<T> newInstance(List<T> list) {
+
+        list = new ArrayList<T>(list);
+
+        return null;
+    }
+
+    int size();
+
+    T get(int index);
+
+    int compare(int index1, int index2);
 }
 

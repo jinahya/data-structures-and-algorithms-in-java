@@ -1,4 +1,4 @@
-package com.github.jinahya.algorithm.sort;
+package com.github.jinahya.algorithm.sorting;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.github.jinahya.algorithm.sort.InsertionSort.sort;
+import static com.github.jinahya.algorithm.sorting.InsertionSort.sort;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;

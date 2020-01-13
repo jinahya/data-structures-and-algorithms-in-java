@@ -1,4 +1,4 @@
-package com.github.jinahya.algorithm.sort;
+package com.github.jinahya.algorithm.sorting;
 
 import java.util.Comparator;
 import java.util.List;

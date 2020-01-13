@@ -28,11 +28,11 @@ public class BinaryTreeNode<E, T extends BinaryTreeNode<E, T>>
     @Override
     public String toString() {
         return super.toString() + "{"
-               + "value=" + value
-               + ",parent.value=" + ofNullable(parent).map(Node::getValue).orElse(null)
-               + ",left=" + left
-               + ",right=" + right
-               + "}";
+                + "value=" + value
+                + ",parent.value=" + ofNullable(parent).map(Node::getValue).orElse(null)
+                + ",left=" + left
+                + ",right=" + right
+                + "}";
     }
 
     // -----------------------------------------------------------------------------------------------------------------
