@@ -66,11 +66,15 @@ public class SelectionSortTest {
         final List<Integer> expected = new ArrayList<>(unsorted);
         {
             Collections.sort(expected);
+            assertThat(expected)
+                    .isSortedAccordingTo(naturalOrder());
         }
         final Comparator<Integer> comparator = naturalOrder();
         final List<Integer> actual = new ArrayList<>(unsorted);
         {
             sort(actual, comparator);
+            assertThat(actual)
+                    .isSortedAccordingTo(comparator);
         }
         assertIterableEquals(expected, actual);
     }

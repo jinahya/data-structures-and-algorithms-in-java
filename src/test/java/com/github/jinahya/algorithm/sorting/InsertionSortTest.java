@@ -51,14 +51,18 @@ public class InsertionSortTest {
                 .map(i -> current().nextInt())
                 .boxed()
                 .collect(toList());
+        final List<Integer> expected = new ArrayList<>(unsorted);
+        {
+            Collections.sort(expected);
+            assertThat(expected)
+                    .isSortedAccordingTo(naturalOrder());
+        }
         final Comparator<Integer> comparator = naturalOrder();
         final List<Integer> actual = new ArrayList<>(unsorted);
         {
             sort(actual, comparator);
-        }
-        final List<Integer> expected = new ArrayList<>(unsorted);
-        {
-            Collections.sort(expected);
+            assertThat(actual)
+                    .isSortedAccordingTo(comparator);
         }
         assertIterableEquals(expected, actual);
     }
