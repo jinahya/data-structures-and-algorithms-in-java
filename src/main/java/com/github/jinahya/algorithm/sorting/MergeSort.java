@@ -21,9 +21,14 @@ public class MergeSort {
      * @param sorted     the collection to which those sorted elements are added.
      * @param <E>        element type parameter
      */
-    // top-down
     public static <E> void sort(final List<? extends E> unsorted, final Comparator<? super E> comparator,
                                 final Collection<? super E> sorted) {
+        topDown(unsorted, comparator, sorted);
+    }
+
+    // top-down
+    private static <E> void topDown(final List<? extends E> unsorted, final Comparator<? super E> comparator,
+                                    final Collection<? super E> sorted) {
         if (unsorted == null) {
             throw new NullPointerException("list is null");
         }
@@ -39,9 +44,9 @@ public class MergeSort {
         }
         final int m = unsorted.size() / 2;
         final List<E> l = new ArrayList<>(); // 전체 값들 중 왼쪽 반만큼이 정렬되서 추가될 리스트.
-        sort(unsorted.subList(0, m), comparator, l);
+        topDown(unsorted.subList(0, m), comparator, l);
         final List<E> r = new ArrayList<>(); // 전체 값들 중 오른쪽 반만큼이 정렬되서 추가되 리스트.
-        sort(unsorted.subList(m, unsorted.size()), comparator, r);
+        topDown(unsorted.subList(m, unsorted.size()), comparator, r);
         for (int i = 0, j = 0; i < l.size() || j < r.size(); ) {
             if (i == l.size()) {        // 왼쪽 그룹에 있는 모든 값들이 이미 사용되었습니다.
                 sorted.add(r.get(j++)); // 오른쪽 그룹에 있는 값을 사용합니다.
