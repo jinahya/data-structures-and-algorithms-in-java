@@ -12,8 +12,7 @@ import static com.github.jinahya.algorithm.sorting.InsertionSort.sort;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static java.util.Comparator.naturalOrder;
-import static java.util.Comparator.reverseOrder;
+import static java.util.Comparator.*;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
@@ -69,8 +68,9 @@ public class InsertionSortTest {
         final List<String> actual = new ArrayList<>();
         actual.add("3");
         actual.add("1");
+        actual.add(null);
         actual.add("2");
-        sort(actual, reverseOrder());
-        assertIterableEquals(asList("3", "2", "1"), actual);
+        sort(actual, nullsFirst(reverseOrder()));
+        assertIterableEquals(asList(null, "3", "2", "1"), actual);
     }
 }

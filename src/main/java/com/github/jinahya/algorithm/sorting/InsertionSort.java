@@ -20,9 +20,10 @@ public class InsertionSort {
     public static <E> void sort(final List<E> list, final Comparator<? super E> comparator) {
         for (int i = 1; i < list.size(); i++) {
             for (int j = i; j > 0; j--) {
-                if (comparator.compare(list.get(j - 1), list.get(j)) > 0) {
-                    swap(list, j - 1, j);
+                if (comparator.compare(list.get(j - 1), list.get(j)) <= 0) {
+                    break;
                 }
+                swap(list, j - 1, j);
             }
         }
     }
