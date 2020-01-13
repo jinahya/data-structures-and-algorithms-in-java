@@ -10,7 +10,7 @@ public class InsertionSort {
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Sorts elements in specified list using specified comparator.
+     * Sorts elements in specified list, in place, using specified comparator.
      *
      * @param list       the list whose elements are sorted.
      * @param comparator the comparator for comparing elements in the {@code list}.
@@ -18,6 +18,12 @@ public class InsertionSort {
      * @see List#subList(int, int)
      */
     public static <E> void sort(final List<E> list, final Comparator<? super E> comparator) {
+        if (list == null) {
+            throw new NullPointerException("list is null");
+        }
+        if (comparator == null) {
+            throw new NullPointerException("comparator is null");
+        }
         for (int i = 1; i < list.size(); i++) {
             for (int j = i; j > 0; j--) {
                 if (comparator.compare(list.get(j - 1), list.get(j)) <= 0) {

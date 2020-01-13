@@ -10,7 +10,7 @@ public class SelectionSort {
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Sorts elements in specified list using specified comparator.
+     * Sorts elements in specified list, in place, using specified comparator.
      *
      * @param list       the list whose elements are sorted.
      * @param comparator the comparator for comparing elements in the {@code list}.
