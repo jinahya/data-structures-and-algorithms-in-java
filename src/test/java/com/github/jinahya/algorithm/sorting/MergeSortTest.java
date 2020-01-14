@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -46,7 +47,7 @@ public class MergeSortTest {
     }
 
     /**
-     * Tests {@link SelectionSort#sort(List, Comparator)} method with a list of random elements.
+     * Tests {@link MergeSort#sort(List, Comparator, Collection)} method with a list of random elements.
      */
     @Test
     public void testSort() {

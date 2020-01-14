@@ -44,7 +44,7 @@ public class InsertionSortTest {
     }
 
     /**
-     * Tests {@link SelectionSort#sort(List, Comparator)} method with a list of random elements.
+     * Tests {@link InsertionSort#sort(List, Comparator)} method with a list of random elements.
      */
     @Test
     public void testSort() {
