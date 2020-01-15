@@ -9,8 +9,8 @@ import static java.util.Collections.swap;
 public class Quicksort {
 
     // -----------------------------------------------------------------------------------------------------------------
-    public static <E> void sort(final List<? extends E> list, final Comparator<? super E> comparator,
-                                final BiFunction<List<? extends E>, Comparator<? super E>, Integer> partitioner) {
+    public static <E> void sort(final List<E> list, final Comparator<? super E> comparator,
+                                final BiFunction<? super List<E>, ? super Comparator<? super E>, Integer> partitioner) {
         if (list == null) {
             throw new NullPointerException("list is null");
         }
@@ -35,14 +35,14 @@ public class Quicksort {
              comparator,
              (l, c) -> {
                  assert !l.isEmpty();
-                 final E pivot = l.get(l.size() - 1);
-                 int i = 0;
+                 final int p = l.size() - 1;
+                 int i = 0; // the index to be swapped with the pivot
                  for (int j = 0; j < l.size() - 1; j++) {
-                     if (c.compare(l.get(j), pivot) <= 0) {
+                     if (c.compare(l.get(j), l.get(p)) <= 0) {
                          swap(l, j, i++);
                      }
                  }
-                 swap(l, l.size() - 1, i);
+                 swap(l, p, i);
                  return i;
              });
     }
