@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.github.jinahya.algorithm.sorting.SelectionSort.sort;
+import static com.github.jinahya.algorithm.sorting.SortingTests.usersForTestingStability;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -29,13 +30,13 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 @Slf4j
 public class SelectionSortTest {
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------- List<E>
 
     /**
      * Tests {@link SelectionSort#sort(int[], int, int)} method with an empty list.
      */
     @Test
-    public void testSortWithEmptyList() {
+    public void testSortListWithEmptyList() {
         final List<String> list = emptyList();
         final Comparator<String> comparator = naturalOrder();
         sort(list, comparator);
@@ -47,7 +48,7 @@ public class SelectionSortTest {
      * Test {@link SelectionSort#sort(int[], int, int)} method with a singleton list.
      */
     @Test
-    public void testSortWithSingletonList() {
+    public void testSortListWithSingletonList() {
         final List<Integer> list = singletonList(current().nextInt());
         final Comparator<Integer> comparator = naturalOrder();
         sort(list, comparator);
@@ -59,7 +60,7 @@ public class SelectionSortTest {
      * Tests {@link SelectionSort#sort(List, Comparator)} method with a list of random elements.
      */
     @Test
-    public void testSort() {
+    public void testSortListWithRandomElements() {
         final List<Integer> unsorted
                 = range(0, current().nextInt(2, 128))
                 .map(i -> current().nextInt())
@@ -85,7 +86,7 @@ public class SelectionSortTest {
      * Tests {@link SelectionSort#sort(List, Comparator)} method in reverse order.
      */
     @Test
-    public void testSortReverse() {
+    public void testSortListNullFirstReverse() {
         final List<String> actual = new ArrayList<>();
         actual.add("3");
         actual.add("1");
@@ -93,5 +94,20 @@ public class SelectionSortTest {
         actual.add("2");
         sort(actual, nullsFirst(reverseOrder()));
         assertIterableEquals(asList(null, "3", "2", "1"), actual);
+    }
+
+    /**
+     * Tests {@link SelectionSort#sort(List, Comparator)} method for stability.
+     */
+    @Test
+    public void testSortListForStability() {
+        final List<SortingTests.User> list = usersForTestingStability();
+        log.debug("unsorted: {}", list);
+        sort(list, SortingTests.User.COMPARING_AGE);
+        log.debug("sorted: {}", list);
+        assertThat(list)
+                .isSortedAccordingTo(SortingTests.User.COMPARING_AGE);
+        final boolean stable = list.indexOf(SortingTests.User.JANE) == 2;
+        log.debug("stable: {}", stable);
     }
 }

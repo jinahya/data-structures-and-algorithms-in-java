@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.github.jinahya.algorithm.sorting.MergeSort.sort;
+import static com.github.jinahya.algorithm.sorting.SortingTests.usersForTestingStability;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -25,9 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 @Slf4j
 public class MergeSortTest {
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------- sortTopDown(List<? super E>, ...)
     @Test
-    public void testSortWithEmptyList() {
+    public void testSortTopDownListWithEmptyList() {
         final List<Integer> unsorted = emptyList();
         final Comparator<Integer> comparator = naturalOrder();
         final List<Integer> sorted = new ArrayList<>(unsorted.size());
@@ -37,7 +38,7 @@ public class MergeSortTest {
     }
 
     @Test
-    public void testSortWithSingletonList() {
+    public void testSortTopDownListWithSingletonList() {
         final List<Integer> unsorted = singletonList(current().nextInt());
         final Comparator<Integer> comparator = naturalOrder();
         final List<Integer> sorted = new ArrayList<>(unsorted.size());
@@ -50,7 +51,7 @@ public class MergeSortTest {
      * Tests {@link MergeSort#sort(List, Comparator, Collection)} method with a list of random elements.
      */
     @Test
-    public void testSort() {
+    public void testSortTopDownListWithRandomElements() {
         final List<Integer> unsorted
                 = range(0, current().nextInt(2, 128))
                 .map(i -> current().nextInt())
@@ -73,7 +74,7 @@ public class MergeSortTest {
     }
 
     @Test
-    public void testSortReverse() {
+    public void testSortTopDownListNullFirstReverseOrder() {
         final List<String> actual = new ArrayList<>();
         {
             final List<String> unsorted = new ArrayList<>();
@@ -84,5 +85,18 @@ public class MergeSortTest {
             sort(unsorted, nullsFirst(reverseOrder()), actual);
         }
         assertIterableEquals(asList(null, "3", "2", "1"), actual);
+    }
+
+    @Test
+    public void testSortTopDownListForStability() {
+        final List<SortingTests.User> unsorted = usersForTestingStability();
+        log.debug("unsorted: {}", unsorted);
+        final List<SortingTests.User> sorted = new ArrayList<>(unsorted.size());
+        MergeSort.sortTopDown(unsorted, SortingTests.User.COMPARING_AGE, sorted);
+        log.debug("sorted: {}", sorted);
+        assertThat(sorted)
+                .isSortedAccordingTo(SortingTests.User.COMPARING_AGE);
+        final boolean stable = unsorted.indexOf(SortingTests.User.JANE) == 2;
+        log.debug("stable: {}", stable);
     }
 }

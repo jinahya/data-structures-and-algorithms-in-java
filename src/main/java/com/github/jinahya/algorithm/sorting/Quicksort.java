@@ -4,10 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.LongAdder;
 
 import static java.util.Collections.swap;
-import static java.util.Optional.ofNullable;
 
 /**
  * A class contains Quicksort implementations.
@@ -19,8 +17,6 @@ import static java.util.Optional.ofNullable;
 public class Quicksort {
 
     // ---------------------------------------------------------------------------------------------------------- lomuto
-    static final ThreadLocal<LongAdder> TL_LOMUTO_SWAP_COUNTER = new ThreadLocal<>();
-
     private static <E> int partitionLomuto(final List<E> list, final Comparator<? super E> comparator) {
         if (list == null) {
             throw new NullPointerException("list is null");
@@ -36,7 +32,6 @@ public class Quicksort {
         for (int j = 0; j < list.size() - 1; j++) {
             if (comparator.compare(list.get(j), list.get(p)) < 0) {
                 swap(list, j, i++);
-                ofNullable(TL_LOMUTO_SWAP_COUNTER.get()).ifPresent(LongAdder::increment);
             }
         }
         swap(list, p, i);
@@ -69,8 +64,6 @@ public class Quicksort {
     }
 
     // ----------------------------------------------------------------------------------------------------------- hoare
-    static final ThreadLocal<LongAdder> TL_HOARE_SWAP_COUNTER = new ThreadLocal<>();
-
     private static <E> int partitionHoare(final List<E> list, final Comparator<? super E> comparator) {
         if (list == null) {
             throw new NullPointerException("list is null");
@@ -97,7 +90,6 @@ public class Quicksort {
                 return j;
             }
             swap(list, i, j);
-            ofNullable(TL_HOARE_SWAP_COUNTER.get()).ifPresent(LongAdder::increment);
         }
     }
 

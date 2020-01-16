@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.LongAdder;
 
-import static com.github.jinahya.algorithm.sorting.Quicksort.TL_HOARE_SWAP_COUNTER;
-import static com.github.jinahya.algorithm.sorting.Quicksort.TL_LOMUTO_SWAP_COUNTER;
 import static com.github.jinahya.algorithm.sorting.Quicksort.sortHoare;
 import static com.github.jinahya.algorithm.sorting.Quicksort.sortLomuto;
 import static com.github.jinahya.algorithm.sorting.SortingTests.usersForTestingStability;
@@ -34,13 +31,13 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 @Slf4j
 public class QuicksortTest {
 
-    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------- lomuto(List<E>)
 
     /**
      * Tests {@link Quicksort#sortLomuto(List, Comparator)} method with an empty list.
      */
     @Test
-    public void testSortLomutoWithEmptyList() {
+    public void testSortListLomutoWithEmptyList() {
         final List<Integer> list = emptyList();
         final Comparator<Integer> comparator = naturalOrder();
         sortLomuto(list, comparator);
@@ -49,7 +46,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortLomutoWithSingletonList() {
+    public void testSortListLomutoWithSingletonList() {
         final List<Integer> list = singletonList(current().nextInt());
         final Comparator<Integer> comparator = naturalOrder();
         sortLomuto(list, comparator);
@@ -58,7 +55,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortLomutoWithRandomElements() {
+    public void testSortListLomutoWithRandomElements() {
         final List<Integer> unsorted
                 = range(0, current().nextInt(2, 128))
                 .map(i -> current().nextInt())
@@ -81,7 +78,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortLomutoReverse() {
+    public void testSortListLomutoNullFirstReverseOrder() {
         final List<String> actual = new ArrayList<>();
         actual.add("3");
         actual.add("1");
@@ -92,23 +89,20 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortLomutoStability() {
+    public void testSortListLomutoForStability() {
         final List<SortingTests.User> list = usersForTestingStability();
         log.debug("unsorted: {}", list);
-        TL_LOMUTO_SWAP_COUNTER.remove();
-        TL_LOMUTO_SWAP_COUNTER.set(new LongAdder());
         sortLomuto(list, SortingTests.User.COMPARING_AGE);
         log.debug("sorted: {}", list);
         assertThat(list)
                 .isSortedAccordingTo(SortingTests.User.COMPARING_AGE);
-        log.debug("swaps: {}", TL_LOMUTO_SWAP_COUNTER.get().sum());
         final boolean stable = list.indexOf(SortingTests.User.JANE) == 2;
         log.debug("stable: {}", stable);
     }
 
     // ------------------------------------------------------------------------------------------------------- sortHoare
     @Test
-    public void testSortHoareWithEmptyList() {
+    public void testSortListHoareWithEmptyList() {
         final List<Integer> list = emptyList();
         final Comparator<Integer> comparator = naturalOrder();
         sortHoare(list, comparator);
@@ -117,7 +111,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortHoareWithSingletonList() {
+    public void testSortListHoareWithSingletonList() {
         final List<Integer> list = singletonList(current().nextInt());
         final Comparator<Integer> comparator = naturalOrder();
         sortHoare(list, comparator);
@@ -126,7 +120,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortHoareWithRandomElements() {
+    public void testSortListHoareWithRandomElements() {
         final List<Integer> unsorted
                 = range(0, current().nextInt(2, 128))
                 .map(i -> current().nextInt())
@@ -149,7 +143,7 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortHoareReverse() {
+    public void testSortListHoareNullFirstReverseOrder() {
         final List<String> actual = new ArrayList<>();
         actual.add("3");
         actual.add("1");
@@ -160,16 +154,13 @@ public class QuicksortTest {
     }
 
     @Test
-    public void testSortHoareStability() {
+    public void testSortListHoareForStability() {
         final List<SortingTests.User> list = usersForTestingStability();
         log.debug("unsorted: {}", list);
-        TL_HOARE_SWAP_COUNTER.remove();
-        TL_HOARE_SWAP_COUNTER.set(new LongAdder());
         sortHoare(list, SortingTests.User.COMPARING_AGE);
         log.debug("sorted: {}", list);
         assertThat(list)
                 .isSortedAccordingTo(SortingTests.User.COMPARING_AGE);
-        log.debug("swaps: {}", TL_HOARE_SWAP_COUNTER.get().sum());
         final boolean stable = list.indexOf(SortingTests.User.JANE) == 2;
         log.debug("stable: {}", stable);
     }
