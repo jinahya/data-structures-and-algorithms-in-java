@@ -34,7 +34,7 @@ public class Quicksort {
         final int p = list.size() - 1;
         int i = 0;
         for (int j = 0; j < list.size() - 1; j++) {
-            if (comparator.compare(list.get(j), list.get(p)) < 0) { // not stable
+            if (comparator.compare(list.get(j), list.get(p)) < 0) {
                 swap(list, j, i++);
                 ofNullable(TL_LOMUTO_SWAP_COUNTER.get()).ifPresent(LongAdder::increment);
             }
