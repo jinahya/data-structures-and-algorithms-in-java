@@ -147,6 +147,22 @@ public class SelectionSort {
         // TODO: 1/11/2020 Implement!
     }
 
+    public static void sort(final char[] array, final int fromIndex, final int toIndex) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
+        }
+        if (toIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
+        }
+        // TODO: 1/11/2020 Implement!
+    }
+
     public static void sort(final float[] array, final int fromIndex, final int toIndex) {
         if (array == null) {
             throw new NullPointerException("array is null");
@@ -179,23 +195,11 @@ public class SelectionSort {
         // TODO: 1/11/2020 Implement!
     }
 
-    public static void sort(final char[] array, final int fromIndex, final int toIndex) {
-        if (array == null) {
-            throw new NullPointerException("array is null");
-        }
-        if (fromIndex > toIndex) {
-            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
-        }
-        if (fromIndex < 0) {
-            throw new ArrayIndexOutOfBoundsException("fromIndex(" + fromIndex + ") < " + 0);
-        }
-        if (toIndex > array.length) {
-            throw new ArrayIndexOutOfBoundsException("toIndex(" + toIndex + ") > array.length(" + array.length + ")");
-        }
-        // TODO: 1/11/2020 Implement!
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Creates a new instance.
+     */
     private SelectionSort() {
         super();
     }
